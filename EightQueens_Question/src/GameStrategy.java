@@ -3,15 +3,20 @@ public class GameStrategy {
 	private int numQueens = 0;
 
 	private int getColumn(int cellId) {
-		// WRITE YOUR LOGIC HERE...................................		
+		// WRITE YOUR LOGIC HERE...................................	
+		int column;
+		column = cellId%8;
+		//System.out.println("CellID:"+cellId);
 
-		return 0;	// just for the heck of it
+		return column;	// just for the heck of it
 	}
 	
 	private int getRow(int cellId) {
 		// WRITE YOUR LOGIC HERE....................................
+		int row;
+		row = cellId/8;
 		
-		return 0;	// just for the heck of it
+		return row;	// just for the heck of it
 	}
 
 	public boolean isValidPosition(int cellId) {
@@ -29,7 +34,37 @@ public class GameStrategy {
 			WRITE YOUR LOGIC HERE...............................
 
 		*/
-		return isValid;
+		 for (int i = 0; i < 8; i++) 
+	            if (placedQueens[row][i]) 
+	            	isValid = false; 
+		 for (int i = 0; i < 8; i++) 
+	            if (placedQueens[i][col]) 
+	            	isValid = false; 
+	  
+	        /* Check upper diagonal on left side */
+	        for (int i = row, j = col; i >= 0 && j >= 0; i--, j--) 
+	            if (placedQueens[i][j]) 
+	            	isValid = false; 
+	  
+	        /* Check lower diagonal on left side */
+	        for (int i = row, j = col; j >= 0 && i < 8; i++, j--) 
+	            if (placedQueens[i][j]) 
+	                isValid = false; 
+	        /* Check upper diagonal on right side */
+	        for (int i = row, j = col; i >= 0 && j < 8; i--, j++) 
+	            if (placedQueens[i][j]) 
+	            	isValid = false; 
+	  
+	        /* Check lower diagonal on right side */
+	        for (int i = row, j = col; j <8 && i < 8; i++, j++) 
+	            if (placedQueens[i][j]) 
+	                isValid = false; 
+	        if(isValid) {
+	        	placedQueens[row][col] = true;
+		        numQueens++;
+	        }
+	        
+	        return isValid;
 	}
 }
 
